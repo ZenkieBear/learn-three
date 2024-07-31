@@ -1,6 +1,8 @@
 # Learn Three.js
 This project has some demo for `Three.js`.
 
+Built with Vite, in Vanilla + Typescript model.
+
 # Getting Start
 
 ## Prepare Node.js Environment
@@ -24,7 +26,8 @@ yarn dev
 ```
 
 ## Visit pages in your browser
-Visit http://localhost:5173/pages/basic/. By adding the `/` character at the end, browser will automatically shows the `index.html` file.
+Visit http://localhost:5173/pages/basic/ after started the development server.
+By adding the `/` character at the end, browser will automatically shows the `index.html` file.
 
 You can find pages in `./src/pages`
 

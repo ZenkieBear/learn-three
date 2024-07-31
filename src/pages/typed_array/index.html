@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <h1>Please checkout the console tab in devtools</h1>
+  <script>
+    // Examples
+    const buffer = new ArrayBuffer(16)
+    if (buffer.byteLength === 16) {
+      console.log("It's 16 bytes");
+    } else {
+      console.log("The length is incorrect!");
+    }
+
+    const int32View = new Int32Array(buffer)
+    for (let i = 0; i < int32View.length; i++) {
+      int32View[i] = i * 2
+    }
+
+    // Multiple views using the same buffer
+    const int16View = new Int16Array(buffer)
+    for (let i = 0; i < int16View.length; i++) {
+      console.log(`Index ${i}: ${int16View[i]}`);
+    }
+
+    // Access data which was set by another view with different bits-length
+    int16View[0] = 32
+    console.log(`The data of index 0 in 32-bits integer array is ${int32View[0]}`)
+
+    // Access data with different datatype
+    const float32View = new Float32Array(buffer);
+    console.log(`Data at index 0 in 32-bits float type: ${float32View[0]}`)
+
+    // Read texts from buffer
+    const textBuffer = new ArrayBuffer(8)
+    const uint8 = new Uint8Array(textBuffer)
+    uint8.set([66, 111, 110, 106, 111, 117, 114, 33])
+    const text = new TextDecoder().decode(uint8)
+    console.log(text) // "Bonjour!"
+
+    {
+      const buffer = new ArrayBuffer(16)
+      const uint16 = new Uint16Array(buffer)
+      uint16.set([0x42, 0x6f, 0x6e, 0x6a, 0x6f, 0x75, 0x72, 0x21])
+      const text = String.fromCharCode(...uint16)
+      console.log(text)
+    }
+
+    // Convert to normal array
+    const typedArray = new Uint8Array([1, 2, 3, 4])
+    const normalArray = Array.from(typedArray)
+    console.log(`Normal array: `, normalArray);
+    console.log(`Using spread syntax: `, [...typedArray]);
+  </script>
+</body>
+</html>

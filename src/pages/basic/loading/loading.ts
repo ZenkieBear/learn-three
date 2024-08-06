@@ -1,5 +1,5 @@
-import { Box3, PointLight, Vector3 } from "three";
-import { initial } from "@/lib/initial";
+import { Box3, PointLight, Vector3 } from 'three'
+import { initial } from '@/lib/initial'
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js'
 
 const world = initial()
@@ -9,11 +9,16 @@ renderer.setClearColor(0x000000)
 // Loading object
 const loader = new GLTFLoader()
 let model
-loader.load('/model/MagicCube.glb', function (m) {
-  scene.add(model = m.scene)
-}, undefined, function ( error ) {
-	console.error( error );
-})
+loader.load(
+  '/model/MagicCube.glb',
+  function (m) {
+    scene.add((model = m.scene))
+  },
+  undefined,
+  function (error) {
+    console.error(error)
+  }
+)
 
 // Lights
 const light = new PointLight(0xffffff, 40000)
@@ -24,13 +29,13 @@ light1.position.set(-50, -50, -50)
 scene.add(light1)
 
 // Adding animate
-world.setAnimate(t => {
+world.setAnimate((t) => {
   // Scale and follow the object
   if (model) {
     // Create bounding box
-    const boundingBox = new Box3().setFromObject(model);
-    const size = new Vector3();
-    boundingBox.getSize(size);
+    const boundingBox = new Box3().setFromObject(model)
+    const size = new Vector3()
+    boundingBox.getSize(size)
 
     // Get central
     const center = new Vector3()
@@ -41,9 +46,10 @@ world.setAnimate(t => {
     // console.log(size.length());
     camera.position.set(
       center.x + Math.sin(t) * cameraDistance,
-      center.y + Math.sin(t) * cameraDistance * .5,
-      center.z + Math.cos(t) * cameraDistance)
-    camera.near = .1;
+      center.y + Math.sin(t) * cameraDistance * 0.5,
+      center.z + Math.cos(t) * cameraDistance
+    )
+    camera.near = 0.1
     camera.far = cameraDistance * 10
 
     // Scaling model

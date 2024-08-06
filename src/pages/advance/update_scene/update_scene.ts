@@ -20,7 +20,7 @@ let drawCount = 2 // draw the first 2 points, only
 geometry.setDrawRange(0, drawCount)
 
 // Material
-const material = new Three.LineBasicMaterial( { color: 0xffffff } );
+const material = new Three.LineBasicMaterial({ color: 0xffffff })
 
 // Line
 const line = new Three.Line(geometry, material)
@@ -30,14 +30,16 @@ scene.add(line)
 const positionAttribute = line.geometry.getAttribute('position')
 
 function updatePositions() {
-  let x = 0, y = 0, z = 0
+  let x = 0,
+    y = 0,
+    z = 0
 
   for (let i = 0; i < positionAttribute.count; i++) {
     positionAttribute.setXYZ(i, x, y, z)
 
-    x += (Math.random() - .5) * 30
-    y += (Math.random() - .5) * 30
-    z += (Math.random() - .5) * 30
+    x += (Math.random() - 0.5) * 30
+    y += (Math.random() - 0.5) * 30
+    z += (Math.random() - 0.5) * 30
   }
 }
 updatePositions()
@@ -49,11 +51,9 @@ world.setAnimate(() => {
   // Change the draw-range
   line.geometry.setDrawRange(0, drawCount)
 
-
   if (drawCount === 0) {
     updatePositions()
 
-    positionAttribute.needsUpdate = true    
+    positionAttribute.needsUpdate = true
   }
 })
-

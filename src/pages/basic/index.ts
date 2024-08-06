@@ -1,15 +1,14 @@
-
 import * as THREE from 'three'
 
-var WIDTH = window.innerWidth;
-var HEIGHT = window.innerHeight;
+const WIDTH = window.innerWidth
+const HEIGHT = window.innerHeight
 
-    /* all our JavaScript code goes here */
+/* all our JavaScript code goes here */
 // Initialize the Canvas
 const renderer = new THREE.WebGLRenderer({ antialias: true })
-renderer.setSize(WIDTH, HEIGHT);
-renderer.setClearColor(0xdddddd, 1);
-document.body.appendChild(renderer.domElement);
+renderer.setSize(WIDTH, HEIGHT)
+renderer.setClearColor(0xdddddd, 1)
+document.body.appendChild(renderer.domElement)
 
 // Make a scene
 const scene = new THREE.Scene()
@@ -28,9 +27,9 @@ const boxGeometry = new THREE.BoxGeometry(10, 10, 10)
 const basicMaterial = new THREE.MeshBasicMaterial({ color: 0x0095dd })
 
 // Mesh binds shape and material
-var cube = new THREE.Mesh(boxGeometry, basicMaterial)
+const cube = new THREE.Mesh(boxGeometry, basicMaterial)
 scene.add(cube)
-cube.rotation.set(.4, .2, 0)
+cube.rotation.set(0.4, 0.2, 0)
 cube.position.x = -25
 
 // More shapes and materials
@@ -67,5 +66,5 @@ render()
 // Animation
 function animate() {
   if (!boxGeometry) return
-  cube.rotation.y += .01
+  cube.rotation.y += 0.01
 }

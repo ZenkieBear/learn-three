@@ -10,7 +10,7 @@ const camera = new Three.PerspectiveCamera(45, window.innerWidth / window.innerH
 camera.position.set(30, 30, 30)
 camera.lookAt(0, 0, 0)
 
-const scene = new Three.Scene();
+const scene = new Three.Scene()
 
 // Let's start
 const material = new Three.LineBasicMaterial({ color: 0x999999 })
@@ -28,65 +28,79 @@ function drawGrid(dividers = 2, plusLength = gap) {
   // Central lines
   // x
   drawLine(
-    new Three.Vector3(-.5 * length, 0),
-    new Three.Vector3(.5 * length, 0), 
+    new Three.Vector3(-0.5 * length, 0),
+    new Three.Vector3(0.5 * length, 0),
     new Three.LineBasicMaterial({ color: 0xff0000 })
   )
   // y
   drawLine(
-    new Three.Vector3(0, -.5 * length, 0),
-    new Three.Vector3(0, .5 * length, 0),
+    new Three.Vector3(0, -0.5 * length, 0),
+    new Three.Vector3(0, 0.5 * length, 0),
     new Three.LineBasicMaterial({ color: 0x00ff00 })
   )
   // z
   drawLine(
-    new Three.Vector3(0, 0, -.5 * length),
-    new Three.Vector3(0, 0, .5 * length),
+    new Three.Vector3(0, 0, -0.5 * length),
+    new Three.Vector3(0, 0, 0.5 * length),
     new Three.LineBasicMaterial({ color: 0x0000ff })
   )
 
   for (let i = 1; i < dividers; i++) {
-  // for (let i = 1; i < 0; i++) {
+    // for (let i = 1; i < 0; i++) {
     // x lines
-    drawLine(new Three.Vector3(-.5 * length,  - gap * i, 0),
-      new Three.Vector3(.5 * length,  -gap * i, 0),
-      material)
-    drawLine(new Three.Vector3(-.5 * length,  gap * i, 0),
-      new Three.Vector3(.5 * length,  gap * i, 0),
-      material)
+    drawLine(
+      new Three.Vector3(-0.5 * length, -gap * i, 0),
+      new Three.Vector3(0.5 * length, -gap * i, 0),
+      material
+    )
+    drawLine(
+      new Three.Vector3(-0.5 * length, gap * i, 0),
+      new Three.Vector3(0.5 * length, gap * i, 0),
+      material
+    )
 
     // y lines
-    drawLine(new Three.Vector3(- gap * i,  -.5 * length, 0),
-      new Three.Vector3(-gap * i, .5 * length, 0),
-      material)
-    drawLine(new Three.Vector3(gap * i, -.5 * length, 0),
-      new Three.Vector3(gap * i, .5 * length, 0),
-      material)
+    drawLine(
+      new Three.Vector3(-gap * i, -0.5 * length, 0),
+      new Three.Vector3(-gap * i, 0.5 * length, 0),
+      material
+    )
+    drawLine(
+      new Three.Vector3(gap * i, -0.5 * length, 0),
+      new Three.Vector3(gap * i, 0.5 * length, 0),
+      material
+    )
 
     // z lines
-    drawLine(new Three.Vector3(0, - gap * i,  -.5 * length),
-      new Three.Vector3(0, -gap * i, .5 * length),
-      material)
-    drawLine(new Three.Vector3(0, gap * i, -.5 * length),
-      new Three.Vector3(0, gap * i, .5 * length),
-      material)
+    drawLine(
+      new Three.Vector3(0, -gap * i, -0.5 * length),
+      new Three.Vector3(0, -gap * i, 0.5 * length),
+      material
+    )
+    drawLine(
+      new Three.Vector3(0, gap * i, -0.5 * length),
+      new Three.Vector3(0, gap * i, 0.5 * length),
+      material
+    )
 
     // zy crossing-lines
-    drawLine(new Three.Vector3(0,  -.5 * length, - gap * i),
-      new Three.Vector3(0, .5 * length, -gap * i),
-      material)
-    drawLine(new Three.Vector3(0, -.5 * length, gap * i),
-      new Three.Vector3(0, .5 * length, gap * i),
-      material)
+    drawLine(
+      new Three.Vector3(0, -0.5 * length, -gap * i),
+      new Three.Vector3(0, 0.5 * length, -gap * i),
+      material
+    )
+    drawLine(
+      new Three.Vector3(0, -0.5 * length, gap * i),
+      new Three.Vector3(0, 0.5 * length, gap * i),
+      material
+    )
   }
 }
 drawGrid(50)
 
 // Central ball
-const sphereGeometry = new Three.SphereGeometry(.5, 16, 16)
-const sphere = new Three.Mesh(
-  sphereGeometry,
-  new Three.MeshPhongMaterial({ color: 0x999999 }))
+const sphereGeometry = new Three.SphereGeometry(0.5, 16, 16)
+const sphere = new Three.Mesh(sphereGeometry, new Three.MeshPhongMaterial({ color: 0x999999 }))
 scene.add(sphere)
 
 // Light
@@ -95,8 +109,10 @@ light.position.set(50, 50, 50)
 scene.add(light)
 
 // Tracking ball
-const trackBall = new Three.Mesh(new Three.SphereGeometry(1, 16, 16),
-  new Three.MeshLambertMaterial({ color: 0xffff00 }))
+const trackBall = new Three.Mesh(
+  new Three.SphereGeometry(1, 16, 16),
+  new Three.MeshLambertMaterial({ color: 0xffff00 })
+)
 scene.add(trackBall)
 
 // Animation
@@ -104,12 +120,12 @@ function animation(t) {
   const trackballDistance = 20
   // Track ball's moving strategy
   trackBall.position.x = Math.sin(t) * trackballDistance
-  trackBall.position.y = Math.cos(t) * trackballDistance * .5
+  trackBall.position.y = Math.cos(t) * trackballDistance * 0.5
   trackBall.position.z = Math.cos(t) * trackballDistance
 
   // Camera's moving strategy
   const cameraDistance = trackballDistance * 3
-  const cameraDelay = .8
+  const cameraDelay = 0.8
   camera.position.x = Math.sin(t * cameraDelay) * cameraDistance
   camera.position.z = Math.cos(t * cameraDelay) * cameraDistance
   // camera.position.set(

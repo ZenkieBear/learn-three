@@ -7,9 +7,9 @@ export function initial() {
   renderer.setClearColor(0xffffff)
   renderer.setSize(window.innerWidth, window.innerHeight)
   document.body.appendChild(renderer.domElement)
-  
+
   const camera = new PerspectiveCamera(45, window.innerWidth / window.innerHeight, 1, 10000)
-  
+
   const scene = new Scene()
 
   let animate: AnimateFunc
@@ -20,7 +20,7 @@ export function initial() {
   let t = 0
   function render() {
     requestAnimationFrame(render)
-    t += .01
+    t += 0.01
     animate?.(t)
     renderer.render(scene, camera)
   }

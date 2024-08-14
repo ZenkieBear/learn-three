@@ -1,6 +1,8 @@
 import { initial } from '@/lib/initial'
+import { useMenu } from '@/lib/menu'
 import * as Three from 'three'
 
+useMenu()
 const world = initial()
 const { scene, renderer, camera } = world
 renderer.setClearColor(0x000000)

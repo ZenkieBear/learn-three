@@ -3,6 +3,7 @@ import * as Three from 'three'
 import { ParametricGeometry } from 'three/addons/geometries/ParametricGeometry.js'
 import { FontLoader } from 'three/addons/loaders/FontLoader.js'
 import { TextGeometry } from 'three/addons/geometries/TextGeometry.js'
+import { useMenu } from '@/lib/menu'
 
 async function main() {
   const world = initial()
@@ -285,4 +286,5 @@ async function main() {
   }
 }
 
+useMenu()
 main()

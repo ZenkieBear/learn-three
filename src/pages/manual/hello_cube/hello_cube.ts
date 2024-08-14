@@ -1,3 +1,4 @@
+import { useMenu } from '@/lib/menu'
 import * as Three from 'three'
 
 function main() {
@@ -102,4 +103,5 @@ function main() {
   }
 }
 
+useMenu()
 main()

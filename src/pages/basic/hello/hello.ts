@@ -1,5 +1,7 @@
+import { useMenu } from '@/lib/menu'
 import * as THREE from 'three'
 
+useMenu()
 const WIDTH = window.innerWidth
 const HEIGHT = window.innerHeight
 

@@ -16,11 +16,13 @@ export const renderMenu = (menus: MenuNode[], container: HTMLUListElement) => {
     const item = document.createElement('li')
     const link = document.createElement('a')
     link.innerText = menu.label
+    if (menu.url) link.href = menu.url
     item.append(link)
 
     container.append(item)
 
     if (menu.children) {
+      item.classList.add('sub-menu-item')
       const indicator = document.createElement('div')
       indicator.className = 'indicator'
       link.append(indicator)
@@ -29,8 +31,6 @@ export const renderMenu = (menus: MenuNode[], container: HTMLUListElement) => {
       subMenu.className = 'sub-menu'
       renderMenu(menu.children, subMenu)
       item.append(subMenu)
-    } else {
-      link.href = menu.url
     }
   })
 }
@@ -67,7 +67,16 @@ const menus: MenuNode[] = [
       },
       {
         label: 'Scene Graph',
-        url: '/pages/manual/scenegraph/'
+        url: '/pages/manual/scenegraph/',
+        children: [
+          {
+            label: 'Tank'
+          }
+        ]
+      },
+      {
+        label: 'Primitives',
+        url: '/pages/manual/primitives/'
       }
     ]
   }

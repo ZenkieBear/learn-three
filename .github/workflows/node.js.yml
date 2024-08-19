@@ -20,13 +20,22 @@ jobs:
         # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
 
     steps:
-    - uses: actions/checkout@v4
-    - name: Use Node.js ${{ matrix.node-version }}
+    - name: 🛎️ Checkout
+      uses: actions/checkout@v4
+    - name: 👉🏼 Use Node.js ${{ matrix.node-version }}
       uses: actions/setup-node@v4
       with:
         node-version: ${{ matrix.node-version }}
         cache: 'npm'
+    - name: 🧾 Linting & Formatting
     - run: yarn install
     - run: yarn lint
     - run: yarn format
-    - run: yarn preview
+    - name: 🚧 Building
+    - run: yarn build
+    - run: 🚀 Deploying
+    - uses: actions/upload-pages-artifact@v2
+      with:
+        path: './dist'
+    - uses: actions/deploy-pages@v1
+    - run: echo '✅ Success deployed!'

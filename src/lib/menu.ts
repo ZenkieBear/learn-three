@@ -37,6 +37,10 @@ export const renderMenu = (menus: MenuNode[], container: HTMLUListElement) => {
 
 const menus: MenuNode[] = [
   {
+    label: 'Home',
+    url: '/'
+  },
+  {
     label: 'Basic Skills',
     children: [
       {

@@ -6,7 +6,10 @@ $clr-bg-hover: lighten($accent, 20%);
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  transition: 0.3s ease;
+
+  &, &::after, &::before {
+    transition: 0.3s ease;
+  }
 }
 
 ul,

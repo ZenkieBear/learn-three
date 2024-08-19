@@ -1,0 +1,82 @@
+@import '@/style/global.scss';
+
+main {
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+  margin: calc(3.4rem + 2rem) auto 0;
+  padding: 2em;
+  width: 90%;
+  background-color: adjust-color($accent, $lightness: 47%);
+
+  h1 {
+    font-size: 8em;
+    line-height: 1.5;
+  }
+
+  a {
+    position: relative;
+    display: block;
+    padding: 2rem;
+    width: fit-content;
+    color: white;
+    background-color: $accent;
+
+    &::before {
+      content: '→';
+      position: absolute;
+      left: 0;
+      display: block;
+      text-decoration: none;
+      opacity: 0;
+    }
+
+    &:hover {
+      padding-left: 3rem;
+
+      &::before {
+        left: 1em;
+        opacity: 1;
+        transition: all .4s ease-out;
+      }
+    }
+
+  }
+
+  @media screen and (max-width: 768px) {
+    a {
+      padding: 1rem;
+    }
+    h1 {
+      font-size: 5em;
+    }
+  }
+
+  @media screen and (max-width: 425px) {
+    h1 {
+      font-size: 3em;
+    }
+  }
+}
+
+footer {
+  display: flex;
+  flex-direction: column;
+  gap: .5rem;
+  margin-top: 2rem;
+  padding: 2.5% 5% 0;
+  min-height: 50vh;
+  background-color: rgba($accent, 20%);
+  color: $accent;
+
+  a {
+    color: $accent;
+  }
+}
+
+// Customized menu
+.menu {
+  padding: 0 5%;
+  background-color: rgba($accent, 5%);
+  backdrop-filter: blur(1rem);
+}

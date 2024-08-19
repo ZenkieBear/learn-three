@@ -70,7 +70,8 @@ const menus: MenuNode[] = [
         url: '/pages/manual/scenegraph/',
         children: [
           {
-            label: 'Tank'
+            label: 'Tank',
+            url: '/pages/manual/scenegraph/tank/'
           }
         ]
       },

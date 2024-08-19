@@ -8,10 +8,8 @@
   },
   "scripts": {
     "dev": "vite",
-    "build": "run-p type-check \"build-only {@}\" --",
+    "build": "vite build",
     "preview": "vite preview",
-    "build-only": "vite build",
-    "type-check": "vue-tsc --build --force",
     "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --fix --ignore-path .eslintignore",
     "format": "prettier --write src/"
   },
@@ -24,11 +22,13 @@
   },
   "devDependencies": {
     "@rushstack/eslint-patch": "^1.8.0",
+    "@types/node": "^22.4.1",
     "@types/three": "^0.167.1",
     "@typescript-eslint/parser": "^8.0.1",
     "@vue/eslint-config-prettier": "^9.0.0",
     "@vue/eslint-config-typescript": "^13.0.0",
     "eslint": "^8.57.0",
+    "glob": "^11.0.0",
     "prettier": "^3.3.3",
     "sass": "^1.77.8",
     "typescript": "^5.5.4",

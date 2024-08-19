@@ -33,7 +33,7 @@ jobs:
     - run: yarn format
     - name: 🚧 Building
     - run: yarn build
-    - run: 🚀 Deploying
+    - name: 🚀 Deploying
     - uses: actions/upload-pages-artifact@v2
       with:
         path: './dist'

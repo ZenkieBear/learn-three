@@ -7,7 +7,9 @@ $clr-bg-hover: lighten($accent, 20%);
   padding: 0;
   box-sizing: border-box;
 
-  &, &::after, &::before {
+  &,
+  &::after,
+  &::before {
     transition: 0.3s ease;
   }
 }
@@ -96,8 +98,8 @@ $indicator-color: black;
 
 .menu > li,
 .sub-menu > li {
-  transition: .3s ease-out;
-  
+  transition: 0.3s ease-out;
+
   &:hover > .sub-menu {
     transform: scaleY(1);
   }

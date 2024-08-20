@@ -2,12 +2,13 @@
   "compilerOptions": {
     "target": "ES2015",
     "useDefineForClassFields": true,
-    "module": "nodenext",
+    "module": "ESNext",
     "lib": ["ES2020", "DOM", "DOM.Iterable", "ES2015"],
     "skipLibCheck": true,
+    "allowJs": true,
 
     /* Bundler mode */
-    "moduleResolution": "NodeNext",
+    "moduleResolution": "Bundler",
     "allowImportingTsExtensions": true,
     "resolveJsonModule": true,
     "isolatedModules": true,

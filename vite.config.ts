@@ -1,5 +1,7 @@
+/// <reference types="vitest" />
+
 import { globSync } from 'glob'
-import path, { resolve } from 'path'
+import path from 'path'
 import { fileURLToPath, URL } from 'url'
 import { defineConfig } from 'vite'
 

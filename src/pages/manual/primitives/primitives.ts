@@ -1,9 +1,10 @@
-import { initial } from '@/lib/initial'
 import * as Three from 'three'
 import { ParametricGeometry } from 'three/addons/geometries/ParametricGeometry.js'
-import { FontLoader } from 'three/addons/loaders/FontLoader.js'
 import { TextGeometry } from 'three/addons/geometries/TextGeometry.js'
+import { Font, FontLoader } from 'three/examples/jsm/Addons.js'
 import { useMenu } from '@/lib/menu'
+import { initial } from '@/lib/initial'
+import GridLayout from '@/lib/grid'
 
 async function main() {
   const world = initial()
@@ -15,9 +16,16 @@ async function main() {
   camera.position.set(0, 0, 120)
   camera.lookAt(0, 0, 0)
 
-  const objects = []
+  type ObjectType = Three.Mesh | Three.LineSegments | Three.Object3D
 
-  function addObject(x, y, obj) {
+  const gridLayout = new GridLayout<ObjectType>({
+    cols: 5,
+    size: 8,
+    gap: 8
+  })
+  const objects = gridLayout.objects
+
+  function addObject(x: number, y: number, obj: ObjectType) {
     obj.position.x = x
     obj.position.y = y
 
@@ -32,18 +40,18 @@ async function main() {
 
     const hue = Math.random()
     const saturate = 1
-    const luiminace = 0.55
-    material.color.setHSL(hue, saturate, luiminace)
+    const luminance = 0.55
+    material.color.setHSL(hue, saturate, luminance)
 
     return material
   }
 
-  function addSolidGeometry(x, y, geometry) {
+  function addSolidGeometry(x: number, y: number, geometry: Three.BufferGeometry) {
     const mesh = new Three.Mesh(geometry, createMaterial())
     addObject(x, y, mesh)
   }
 
-  function addLineGeometry(x, y, geometry) {
+  function addLineGeometry(x: number, y: number, geometry: Three.BufferGeometry) {
     const material = new Three.LineBasicMaterial({ color: 0x000000 })
     const mesh = new Three.LineSegments(geometry, material)
     addObject(x, y, mesh)
@@ -67,37 +75,17 @@ async function main() {
     })
   })
 
-  // Grid layout
-  const cols = 5
-  const size = 8
-  const gap = 8
-
-  const generateGridPosition = (idx: number) => {
-    const prevX = idx % cols
-    const x = prevX === 0 ? 0 : prevX
-    const y = Math.floor(idx / cols)
-
-    const rows = Math.ceil(objects.length / cols)
-
-    const offsetX = (cols * size + Math.max(cols - 1, 0) * gap) / 2
-    const offsetY = (rows * size + Math.max(rows - 1, 0) * gap) / 2
-
-    const posX = x * (size + gap) - offsetX
-    const posY = -y * (size + gap) + offsetY
-    return { posX, posY }
-  }
-
-  function adjustyGrid() {
+  function adjustGrid() {
     objects.forEach((obj, idx) => {
-      const { posX, posY } = generateGridPosition(idx)
+      const { posX, posY } = gridLayout.computePosition(idx)
       obj.position.x = posX
       obj.position.y = posY
     })
   }
 
-  function addGridGeometry(obj: Three.BufferGeometry | Three.Object3D) {
+  function addGridGeometry(obj: Three.BufferGeometry) {
     addSolidGeometry(0, 0, obj)
-    adjustyGrid()
+    adjustGrid()
   }
 
   {
@@ -149,13 +137,13 @@ async function main() {
   }
 
   {
-    const generator = (v, u, target) => {
-      u *= 10
+    const generator = (u: number, v: number, target: Three.Vector3) => {
       v *= 10
+      u *= 10
 
-      const x = u - 5
-      const y = v - 5
-      const z = Math.sin(u * 0.5) * Math.sin(v * 0.2)
+      const x = v - 5
+      const y = u - 5
+      const z = Math.sin(v * 0.5) * Math.sin(u * 0.2)
       target.set(x, y, z).multiplyScalar(1)
     }
     addGridGeometry(new ParametricGeometry(generator, 25, 25))
@@ -199,7 +187,7 @@ async function main() {
 
   const loader = new FontLoader()
 
-  function loadFont(url: string) {
+  function loadFont(url: string): Promise<Font> {
     return new Promise((resolve, reject) => {
       loader.load(url, resolve, undefined, reject)
     })
@@ -221,13 +209,13 @@ async function main() {
     })
     const mesh = new Three.Mesh(geometry, createMaterial())
     geometry.computeBoundingBox()
-    geometry.boundingBox.getCenter(mesh.position).multiplyScalar(-1)
+    ;(geometry.boundingBox as Three.Box3).getCenter(mesh.position).multiplyScalar(-1)
 
     const parent = new Three.Object3D()
     parent.add(mesh)
 
     addObject(0, 0, parent)
-    adjustyGrid()
+    adjustGrid()
   }
   {
     await doit()
@@ -245,12 +233,12 @@ async function main() {
     class CustomSinCurve extends Three.Curve<Three.Vector3> {
       private scale
 
-      constructor(scale) {
+      constructor(scale: number) {
         super()
         this.scale = scale
       }
 
-      getPoint(t) {
+      getPoint(t: number) {
         const x = t * 3 - 1.5
         const y = Math.sin(2 * Math.PI * t)
         const z = 0
@@ -264,11 +252,11 @@ async function main() {
   const boxGeometry = new Three.BoxGeometry(8, 8, 8, 2, 2, 2)
   {
     addLineGeometry(0, 0, new Three.EdgesGeometry(boxGeometry, 80))
-    adjustyGrid()
+    adjustGrid()
   }
   {
     addLineGeometry(0, 0, new Three.WireframeGeometry(boxGeometry))
-    adjustyGrid()
+    adjustGrid()
   }
 
   {
@@ -282,7 +270,7 @@ async function main() {
     addObject(0, 0, ball)
     const dodecahedron = new Three.DodecahedronGeometry(7)
     addObject(0, 0, new Three.Points(dodecahedron, material))
-    adjustyGrid()
+    adjustGrid()
   }
 }
 

@@ -6,6 +6,8 @@ import { useMenu } from '@/lib/menu'
 import { initial } from '@/lib/initial'
 import GridLayout from '@/lib/grid'
 
+type ObjectType = Three.Mesh | Three.LineSegments | Three.Object3D
+
 async function main() {
   const world = initial()
   const { scene, camera } = world
@@ -15,8 +17,6 @@ async function main() {
   camera.far = 1000
   camera.position.set(0, 0, 120)
   camera.lookAt(0, 0, 0)
-
-  type ObjectType = Three.Mesh | Three.LineSegments | Three.Object3D
 
   const gridLayout = new GridLayout<ObjectType>({
     cols: 5,

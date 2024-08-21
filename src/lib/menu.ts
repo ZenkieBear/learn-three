@@ -82,6 +82,10 @@ const menus: MenuNode[] = [
       {
         label: 'Primitives',
         url: '/pages/manual/primitives/'
+      },
+      {
+        label: 'Materials',
+        url: '/pages/manual/materials/'
       }
     ]
   }

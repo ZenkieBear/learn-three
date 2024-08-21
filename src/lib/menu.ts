@@ -86,6 +86,10 @@ const menus: MenuNode[] = [
       {
         label: 'Materials',
         url: '/pages/manual/materials/'
+      },
+      {
+        label: 'Textures',
+        url: '/pages/manual/textures/'
       }
     ]
   }

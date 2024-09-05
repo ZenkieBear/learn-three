@@ -1,27 +1,10 @@
+import { DegRadHelper } from '@/lib/helper'
 import { initial } from '@/lib/initial'
 import { useMenu } from '@/lib/menu'
 import GUI from 'lil-gui'
 import * as Three from 'three'
 
 useMenu()
-
-export class DegRadHelper {
-  obj: any
-  prop: string
-
-  constructor(obj: object, prop: string) {
-    this.obj = obj
-    this.prop = prop
-  }
-
-  get value() {
-    return Three.MathUtils.radToDeg(this.obj[this.prop])
-  }
-
-  set value(v) {
-    this.obj[this.prop] = Three.MathUtils.degToRad(v)
-  }
-}
 
 class String2NumberHelper {
   obj: any

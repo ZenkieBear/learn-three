@@ -2,48 +2,14 @@ import { initial } from '@/lib/initial'
 import { useMenu } from '@/lib/menu'
 import * as Three from 'three'
 import GUI from 'lil-gui'
-
-// Types
-class AxisGridHelper {
-  private grid: Three.GridHelper
-  private axes: Three.AxesHelper
-  private _visible: boolean
-
-  constructor(node: Three.Object3D, units = 10) {
-    const axes = new Three.AxesHelper()
-    const material = axes.material as Three.Material
-    material.depthTest = false
-    axes.renderOrder = 2 // render after grids
-    node.add(axes)
-
-    const grid = new Three.GridHelper(units, units)
-    const gridMaterial = grid.material as Three.Material
-    gridMaterial.depthTest = false
-    grid.renderOrder = 1
-    node.add(grid)
-
-    this.grid = grid
-    this.axes = axes
-    this.visible = false
-  }
-
-  get visible() {
-    return this._visible
-  }
-
-  set visible(v) {
-    this._visible = v
-    this.grid.visible = v
-    this.axes.visible = v
-  }
-}
+import { AxisGridHelper } from '@/lib/helper'
 
 useMenu()
 const world = initial()
 const { scene, camera, renderer } = world
 renderer.setClearColor(0x000000)
 
-const objects = []
+const objects: Three.Object3D[] = []
 
 // Reusable sphere geometry
 const sphereGeometry = new Three.SphereGeometry(1, 6, 6)

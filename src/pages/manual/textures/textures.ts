@@ -1,8 +1,11 @@
 import { initial } from '@/lib/initial'
+import { useMenu } from '@/lib/menu'
 import GUI from 'lil-gui'
 import * as Three from 'three'
 
-class DegRadHelper {
+useMenu()
+
+export class DegRadHelper {
   obj: any
   prop: string
 
@@ -153,4 +156,4 @@ gui.add(texture.offset, 'x', -2, 2, 0.01).name('texture.offset.x')
 gui.add(texture.offset, 'y', -2, 2, 0.01).name('texture.offset.y')
 gui.add(texture.center, 'x', -0.5, 1.5, 0.01).name('texture.center.x')
 gui.add(texture.center, 'y', -0.5, 1.5, 0.01).name('texture.center.y')
-gui.add(new DegRadHelper(texture, 'rotation'), 'value', -360, 360)
+gui.add(new DegRadHelper(texture, 'rotation'), 'value', -360, 360).name('texture.rotation')

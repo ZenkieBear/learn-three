@@ -10,6 +10,7 @@ main {
   background-color: adjust-color($accent, $lightness: 47%);
 
   h1 {
+    font-weight: bolder;
     font-size: 8em;
     line-height: 1.5;
   }

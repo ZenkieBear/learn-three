@@ -14,10 +14,15 @@ export const useMenu = () => {
 export const renderMenu = (menus: MenuNode[], container: HTMLUListElement) => {
   menus.forEach((menu) => {
     const item = document.createElement('li')
-    const link = document.createElement('a')
-    link.innerText = menu.label
-    if (menu.url) link.href = menu.url
-    item.append(link)
+    let label
+    if (menu.url) {
+      label = document.createElement('a')
+      label.href = menu.url
+    } else {
+      label = document.createElement('div')
+    }
+    label.innerText = menu.label
+    item.append(label)
 
     container.append(item)
 
@@ -25,7 +30,7 @@ export const renderMenu = (menus: MenuNode[], container: HTMLUListElement) => {
       item.classList.add('sub-menu-item')
       const indicator = document.createElement('div')
       indicator.className = 'indicator'
-      link.append(indicator)
+      label.append(indicator)
 
       const subMenu = document.createElement('ul')
       subMenu.className = 'sub-menu'
@@ -90,6 +95,10 @@ const menus: MenuNode[] = [
       {
         label: 'Textures',
         url: '/pages/manual/textures/'
+      },
+      {
+        label: 'Lights',
+        url: '/pages/manual/lights/'
       }
     ]
   }
